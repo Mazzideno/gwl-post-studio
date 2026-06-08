@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MazziGroup Post Editor - Professional Design Studio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header with Theme Toggle -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo-container">
+                <div class="logo-placeholder">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="40" height="40" rx="8" fill="var(--accent-color)"/>
+                        <text x="20" y="25" text-anchor="middle" fill="white" font-size="18" font-weight="bold">M</text>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1 class="brand-name">MazziGroup Studio</h1>
+                    <span class="brand-tagline">Professional Post Editor</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-center">
+            <div class="theme-toggle">
+                <button id="themeToggle" class="theme-btn" data-theme-toggle aria-label="Toggle dark/light mode">
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                    <span class="theme-text">Light Mode</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <button class="export-btn" onclick="exportPost()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Export
+            </button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Left Sidebar - Tools -->
+        <aside class="sidebar-left">
+            <div class="tool-section">
+                <h3 class="tool-title">Shapes</h3>
+                <div class="tool-grid">
+                    <button class="tool-btn" onclick="addShape('rectangle')" title="Rectangle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        </svg>
+                    </button>
+                    <button class="tool-btn" onclick="addShape('circle')" title="Circle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="9"/>
+                        </svg>
+                    </button>
+                    <button class="tool-btn" onclick="addShape('triangle')" title="Triangle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 3L22 21H2L12 3Z"/>
+                        </svg>
+                    </button>
+                    <button class="tool-btn" onclick="addShape('line')" title="Line">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="19" x2="19" y2="5"/>
+                        </svg>
+                    </button>
+                    <button class="tool-btn" onclick="addShape('star')" title="Star">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="tool-section">
+                <h3 class="tool-title">Colors</h3>
+                <div class="color-picker-wrapper">
+                    <label>Shape Color:</label>
+                    <input type="color" id="shapeColor" value="#3b82f6" class="color-input">
+                </div>
+                <div class="color-picker-wrapper">
+                    <label>Background:</label>
+                    <input type="color" id="bgColor" value="#ffffff" class="color-input">
+                </div>
+                <div class="color-picker-wrapper">
+                    <label>Accent:</label>
+                    <input type="color" id="accentColor" value="#8b5cf6" class="color-input">
+                </div>
+            </div>
+
+            <div class="tool-section">
+                <h3 class="tool-title">Background Styles</h3>
+                <select id="bgStyle" class="select-input">
+                    <option value="solid">Solid Color</option>
+                    <option value="gradient">Gradient</option>
+                    <option value="geometric">Geometric Pattern</option>
+                    <option value="radial">Radial Gradient</option>
+                    <option value="diagonal">Diagonal Stripes</option>
+                </select>
+            </div>
+
+            <div class="tool-section">
+                <h3 class="tool-title">Canvas Size</h3>
+                <select id="canvasSize" class="select-input" onchange="changeCanvasSize()">
+                    <option value="1080x1080">Square (1080×1080)</option>
+                    <option value="1080x1350">Portrait (1080×1350)</option>
+                    <option value="1080x1920">Story (1080×1920)</option>
+                    <option value="1200x630">Landscape (1200×630)</option>
+                </select>
+            </div>
+        </aside>
+
+        <!-- Main Canvas Area -->
+        <main class="canvas-area">
+            <div class="canvas-container" id="canvasContainer">
+                <canvas id="mainCanvas" width="1080" height="1080"></canvas>
+            </div>
+        </main>
+
+        <!-- Right Sidebar - Properties -->
+        <aside class="sidebar-right">
+            <div class="property-section">
+                <h3 class="property-title">Text Content</h3>
+                
+                <div class="input-group">
+                    <label>Top Label</label>
+                    <div class="input-with-controls">
+                        <input type="text" id="topLabel" class="text-input" placeholder="Top label text" oninput="updateCanvas()">
+                        <div class="text-controls">
+                            <button class="format-btn" onclick="formatText('topLabel', 'upper')" title="UPPERCASE">AA</button>
+                            <button class="format-btn" onclick="formatText('topLabel', 'lower')" title="lowercase">aa</button>
+                            <button class="format-btn" onclick="formatText('topLabel', 'title')" title="Title Case">Aa</button>
+                        </div>
+                    </div>
+                    <div class="align-controls">
+                        <button class="align-btn" onclick="setAlignment('topLabel', 'left')" title="Align Left">⬅</button>
+                        <button class="align-btn" onclick="setAlignment('topLabel', 'center')" title="Align Center">⬆</button>
+                        <button class="align-btn" onclick="setAlignment('topLabel', 'right')" title="Align Right">➡</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Main Headline</label>
+                    <div class="input-with-controls">
+                        <input type="text" id="mainHeadline" class="text-input" placeholder="Main headline" oninput="updateCanvas()">
+                        <div class="text-controls">
+                            <button class="format-btn" onclick="formatText('mainHeadline', 'upper')" title="UPPERCASE">AA</button>
+                            <button class="format-btn" onclick="formatText('mainHeadline', 'lower')" title="lowercase">aa</button>
+                            <button class="format-btn" onclick="formatText('mainHeadline', 'title')" title="Title Case">Aa</button>
+                        </div>
+                    </div>
+                    <div class="align-controls">
+                        <button class="align-btn" onclick="setAlignment('mainHeadline', 'left')" title="Align Left">⬅</button>
+                        <button class="align-btn" onclick="setAlignment('mainHeadline', 'center')" title="Align Center">⬆</button>
+                        <button class="align-btn" onclick="setAlignment('mainHeadline', 'right')" title="Align Right">➡</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Highlighted Phrase</label>
+                    <div class="input-with-controls">
+                        <input type="text" id="highlightedPhrase" class="text-input" placeholder="Highlighted text" oninput="updateCanvas()">
+                        <div class="text-controls">
+                            <button class="format-btn" onclick="formatText('highlightedPhrase', 'upper')" title="UPPERCASE">AA</button>
+                            <button class="format-btn" onclick="formatText('highlightedPhrase', 'lower')" title="lowercase">aa</button>
+                            <button class="format-btn" onclick="formatText('highlightedPhrase', 'title')" title="Title Case">Aa</button>
+                        </div>
+                    </div>
+                    <div class="align-controls">
+                        <button class="align-btn" onclick="setAlignment('highlightedPhrase', 'left')" title="Align Left">⬅</button>
+                        <button class="align-btn" onclick="setAlignment('highlightedPhrase', 'center')" title="Align Center">⬆</button>
+                        <button class="align-btn" onclick="setAlignment('highlightedPhrase', 'right')" title="Align Right">➡</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Body Text</label>
+                    <div class="input-with-controls">
+                        <textarea id="bodyText" class="textarea-input" placeholder="Body text" rows="3" oninput="updateCanvas()"></textarea>
+                        <div class="text-controls">
+                            <button class="format-btn" onclick="formatText('bodyText', 'upper')" title="UPPERCASE">AA</button>
+                            <button class="format-btn" onclick="formatText('bodyText', 'lower')" title="lowercase">aa</button>
+                            <button class="format-btn" onclick="formatText('bodyText', 'title')" title="Title Case">Aa</button>
+                        </div>
+                    </div>
+                    <div class="align-controls">
+                        <button class="align-btn" onclick="setAlignment('bodyText', 'left')" title="Align Left">⬅</button>
+                        <button class="align-btn" onclick="setAlignment('bodyText', 'center')" title="Align Center">⬆</button>
+                        <button class="align-btn" onclick="setAlignment('bodyText', 'right')" title="Align Right">➡</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Call to Action</label>
+                    <div class="input-with-controls">
+                        <input type="text" id="ctaText" class="text-input" placeholder="Call to action" oninput="updateCanvas()">
+                        <div class="text-controls">
+                            <button class="format-btn" onclick="formatText('ctaText', 'upper')" title="UPPERCASE">AA</button>
+                            <button class="format-btn" onclick="formatText('ctaText', 'lower')" title="lowercase">aa</button>
+                            <button class="format-btn" onclick="formatText('ctaText', 'title')" title="Title Case">Aa</button>
+                        </div>
+                    </div>
+                    <div class="align-controls">
+                        <button class="align-btn" onclick="setAlignment('ctaText', 'left')" title="Align Left">⬅</button>
+                        <button class="align-btn" onclick="setAlignment('ctaText', 'center')" title="Align Center">⬆</button>
+                        <button class="align-btn" onclick="setAlignment('ctaText', 'right')" title="Align Right">➡</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="property-section">
+                <h3 class="property-title">Template Style</h3>
+                <div class="template-grid">
+                    <button class="template-btn active" onclick="setTemplate('reality')" data-template="reality">Reality Check</button>
+                    <button class="template-btn" onclick="setTemplate('bold')" data-template="bold">Bold Quote</button>
+                    <button class="template-btn" onclick="setTemplate('myth')" data-template="myth">Myth vs Truth</button>
+                    <button class="template-btn" onclick="setTemplate('fact')" data-template="fact">Language Fact</button>
+                    <button class="template-btn" onclick="setTemplate('culture')" data-template="culture">Culture Drop</button>
+                    <button class="template-btn" onclick="setTemplate('announce')" data-template="announce">Announce</button>
+                </div>
+            </div>
+
+            <div class="property-section">
+                <h3 class="property-title">Logo Upload</h3>
+                <input type="file" id="logoUpload" accept="image/*" class="file-input" onchange="uploadLogo(event)">
+                <div class="logo-controls" id="logoControls" style="display: none;">
+                    <label>Size:</label>
+                    <input type="range" id="logoSize" min="50" max="300" value="100" oninput="updateCanvas()">
+                    <label>Position X:</label>
+                    <input type="range" id="logoX" min="0" max="1080" value="50" oninput="updateCanvas()">
+                    <label>Position Y:</label>
+                    <input type="range" id="logoY" min="0" max="1080" value="50" oninput="updateCanvas()">
+                </div>
+            </div>
+
+            <div class="property-section">
+                <h3 class="property-title">Export Options</h3>
+                <button class="export-option-btn" onclick="downloadPNG()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    Download PNG
+                </button>
+                <button class="export-option-btn" onclick="downloadJPG()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" stroke-dasharray="4 2"/>
+                    </svg>
+                    Download JPG
+                </button>
+                <button class="export-option-btn" onclick="copyCaption()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                        <rect x="8" y="2" width="8" height="4" rx="1"/>
+                    </svg>
+                    Copy Caption
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-text">Built by <strong>MazziGroup</strong></span>
+                <span class="footer-divider">|</span>
+                <span class="footer-text">© 2026 All Rights Reserved</span>
+            </div>
+            <div class="footer-center">
+                <span class="footer-text">Developer: Ikuyinminu Michael Mazzideno</span>
+            </div>
+            <div class="footer-right">
+                <a href="tel:08122985651" class="footer-link">📞 08122985651</a>
+                <span class="footer-divider">|</span>
+                <span class="footer-text">@mazzigroup</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="editor.js"></script>
+</body>
+</html>
